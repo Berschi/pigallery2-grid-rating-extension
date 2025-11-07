@@ -11,13 +11,7 @@ import {ConfigProperty} from 'typeconfig/src/decorators/property/ConfigPropoerty
 
 @SubConfigClass({softReadonly: true})
 export class TestConfig {
-  @ConfigProperty({
-    tags: {
-      name: `Test config value`,
-    },
-    description: `This is just a description`,
-  })
-  myFavouriteNumber: number = 42;
+
 }
 
 /**
