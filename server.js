@@ -93,30 +93,60 @@ const init = async (extension) => {
      * Note: button order matters, but always visible buttons will be shown first
      */
     addRatingButton(extension, {
-        name: 'FAV Photo',
+        name: '5',
         rating: 5,
         innerItems: `
       <!-- Top (centered) -->
-      <use href="#star" x="160" y="0"  width="320" height="320" fill="red" />
+      <use href="#star" x="0" y="0"  width="280" height="280" fill="red" />
+      <use href="#star" x="340" y="0"  width="280" height="280" fill="red" />
 
       <!-- Bottom row -->
-      <use href="#star" x="0" y="320" width="320" height="320" fill="red" />
-      <use href="#star" x="320" y="320" width="320" height="320" fill="red" />
+      <use href="#star" x="0" y="340" width="280" height="280" fill="red" />
+      <use href="#star" x="340" y="340" width="280" height="280" fill="red" />
+
+      <!-- Center -->
+      <use href="#star" x="170" y="170" width="280" height="280" fill="red" />
+
     `
     });
     addRatingButton(extension, {
-        name: 'Great Photo',
+        name: '4',
         rating: 4,
         innerItems: `
-      <use href="#star" x="0"  y="0" width="320" height="320" fill="orange"/>
-      <use href="#star" x="320" y="320" width="320" height="320" fill="orange"/>
+      <!-- Top (centered) -->
+      <use href="#star" x="0" y="0"  width="320" height="320" fill="orange" />
+      <use href="#star" x="320" y="0"  width="320" height="320" fill="orange" />
+
+      <!-- Bottom row -->
+      <use href="#star" x="0" y="320" width="320" height="320" fill="orange" />
+      <use href="#star" x="320" y="320" width="320" height="320" fill="orange" />
     `
     });
     addRatingButton(extension, {
-        name: 'Nice Photo',
+        name: '3',
         rating: 3,
         innerItems: `
-      <use href="#star" x="160"  y="160" width="320" height="320" fill="yellow"/>
+      <!-- Top (centered) -->
+      <use href="#star" x="160" y="0"  width="320" height="320" fill="yellow" />
+
+      <!-- Bottom row -->
+      <use href="#star" x="0" y="320" width="320" height="320" fill="yellow" />
+      <use href="#star" x="320" y="320" width="320" height="320" fill="yellow" />
+    `
+    });
+    addRatingButton(extension, {
+        name: '2',
+        rating: 2,
+        innerItems: `
+      <use href="#star" x="0"  y="0" width="320" height="320" fill="greenyellow"/>
+      <use href="#star" x="320" y="320" width="320" height="320" fill="greenyellow"/>
+    `
+    });
+    addRatingButton(extension, {
+        name: '1',
+        rating: 1,
+        innerItems: `
+      <use href="#star" x="160"  y="160" width="320" height="320" fill="limegreen"/>
     `
     });
     /**
