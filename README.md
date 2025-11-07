@@ -1,8 +1,6 @@
-# pigallery2-sample-extension
+# pigallery2-grid-rating-extension
 
-Pigallery 2 extension example
-
-Fork this project to build your own extension.
+PiGallery2 Grid Rating Extension
 
 
 Usage:
@@ -12,15 +10,12 @@ npm install
 npm run build
 ```
 
-Also see extension documentation at https://github.com/bpatrik/pigallery2/tree/master/extension
+for manual installation/testing: copy the result to the pigallery2 `config/extensions/pigallery2-grid-rating-extension` folder
+
+For initial pigallery2 extension documentation, see https://github.com/bpatrik/pigallery2/tree/master/extension
 
 ------------------------------------------------------------------------
 
-This sample extension adds the following and more: 
+This simple extension adds stars ratings in the grid overview:
 
-Three new buttons to the top left of the photo:
- * Great photo if the photo has 4+ stars
- * edit button for editing a photo
- * delete button for deleting a photo (only form db)
-
-![Added buttons](buttons.png)
+![Stars rating in overview](stars_overview.jpg)
