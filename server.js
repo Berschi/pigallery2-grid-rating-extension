@@ -25,6 +25,30 @@ tslib_1.__decorate([
 TestLoggerEntity = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], TestLoggerEntity);
+const DEFAULT_STAR_VIEWBOX = '0 0 640 640';
+const STAR_SYMBOL_DEFINITION = `
+      <defs>
+        <symbol id="star" viewBox="0 0 640 640">
+          <path d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z"/>
+        </symbol>
+      </defs>
+`;
+const buildStarSvg = (innerItems, viewBox = DEFAULT_STAR_VIEWBOX) => ({
+    viewBox,
+    items: `
+      ${STAR_SYMBOL_DEFINITION}
+
+      ${innerItems}
+    `
+});
+const addRatingButton = (extension, config) => {
+    extension.ui.addMediaButton({
+        name: config.name,
+        svgIcon: buildStarSvg(config.innerItems, config.viewBox),
+        metadataFilter: [{ field: 'rating', comparator: '==', value: config.rating }],
+        alwaysVisible: true
+    });
+};
 const init = async (extension) => {
     extension.Logger.debug(`My extension is setting up. name: ${extension.extensionName}, id: ${extension.extensionId}`);
     /**
@@ -68,65 +92,32 @@ const init = async (extension) => {
      * (Optional) Adding a (non-clickable) button to all photos with 4+ stars
      * Note: button order matters, but always visible buttons will be shown first
      */
-    extension.ui.addMediaButton({
+    addRatingButton(extension, {
         name: 'FAV Photo',
-        svgIcon: {
-            viewBox: '0 0 640 640',
-            items: `
-      <defs>
-        <symbol id="star" viewBox="0 0 640 640">
-          <path d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z"/>
-        </symbol>
-      </defs>
-
-      <!-- Bigger & closer -->
+        rating: 5,
+        innerItems: `
       <!-- Top (centered) -->
       <use href="#star" x="160" y="0"  width="320" height="320" fill="red" />
 
-      <!-- Bottom row (centers at 260 and 380, slight overlap for closeness) -->
+      <!-- Bottom row -->
       <use href="#star" x="0" y="320" width="320" height="320" fill="red" />
       <use href="#star" x="320" y="320" width="320" height="320" fill="red" />
     `
-        },
-        metadataFilter: [{ field: 'rating', comparator: '==', value: 5 }],
-        alwaysVisible: true
     });
-    extension.ui.addMediaButton({
+    addRatingButton(extension, {
         name: 'Great Photo',
-        svgIcon: {
-            viewBox: '0 0 640 640',
-            items: `
-      <defs>
-        <symbol id="star" viewBox="0 0 640 640">
-          <path d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z"/>
-        </symbol>
-      </defs>
-
-      <!-- Two big orange stars side by side -->
+        rating: 4,
+        innerItems: `
       <use href="#star" x="0"  y="0" width="320" height="320" fill="orange"/>
       <use href="#star" x="320" y="320" width="320" height="320" fill="orange"/>
     `
-        },
-        metadataFilter: [{ field: 'rating', comparator: '==', value: 4 }],
-        alwaysVisible: true
     });
-    extension.ui.addMediaButton({
+    addRatingButton(extension, {
         name: 'Nice Photo',
-        svgIcon: {
-            viewBox: '0 0 640 640',
-            items: `
-      <defs>
-        <symbol id="star" viewBox="0 0 640 640">
-          <path d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z"/>
-        </symbol>
-      </defs>
-
-      <!-- Two big orange stars side by side -->
+        rating: 3,
+        innerItems: `
       <use href="#star" x="160"  y="160" width="320" height="320" fill="yellow"/>
     `
-        },
-        metadataFilter: [{ field: 'rating', comparator: '==', value: 3 }],
-        alwaysVisible: true
     });
     /**
       extension.ui.addMediaButton({
